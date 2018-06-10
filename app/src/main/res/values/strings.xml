@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Lpt_v4</string>
+    <string name="action_settings">Settings</string>
+    <string name="field_1">Text F1 </string>
+    <string name="field_2">Text F1 </string>
+    <string name="latitude_label">Lat: </string>
+    <string name="longitude_label">Lng: </string>
+    <string-array name="rodzaje_kont">
+        <item>Użytkownik</item>
+        <item>Technik</item>
+    </string-array>
+
+
+</resources>
