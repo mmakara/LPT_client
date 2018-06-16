@@ -11,64 +11,67 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="49dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="Rejestracja Konta"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.208"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/passwordInput"
-        android:layout_width="wrap_content"
+        android:id="@+id/loginPassword"
+        android:layout_width="163dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:ems="10"
         android:hint="Hasło"
         android:inputType="textPassword"
         android:text="asdadasd"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/userNameInput"
-        android:layout_width="wrap_content"
+        android:layout_width="166dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="Nazwa użytkownika"
         android:inputType="textPersonName"
-        android:text="Nazwa użytkownika"
+        android:text="user"
         app:layout_constraintBottom_toTopOf="@+id/emailInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/emailInput"
-        android:layout_width="wrap_content"
+        android:layout_width="166dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
+        android:hint="E-mail"
         android:inputType="textPersonName"
-        android:text="Email"
-        app:layout_constraintBottom_toTopOf="@+id/passwordInput"
+        android:text="email@gmail.com"
+        app:layout_constraintBottom_toTopOf="@+id/loginPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/rodzajeKontSpinner"
         android:layout_width="218dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="68dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/registerButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -85,16 +88,17 @@
         android:id="@+id/textView6"
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="24dp"
         android:text="Typ konta"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/rodzajeKontSpinner"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.239"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/firstNameInput"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -102,9 +106,9 @@
         android:inputType="textPersonName"
         android:text="Imie"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="67dp" />
+        tools:layout_editor_absoluteY="64dp" />
 
     <TextView
         android:id="@+id/latitude_label2"
@@ -121,7 +125,7 @@
         android:id="@+id/longitude_label2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="12dp"
         android:text="LONG:"
         app:layout_constraintEnd_toStartOf="@+id/longitude_text"
         tools:layout_editor_absoluteY="390dp" />
@@ -137,14 +141,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.85"
-        tools:layout_editor_absoluteX="57dp" />
+        tools:layout_editor_absoluteX="0dp" />
 
     <EditText
         android:id="@+id/longitude_text"
         android:layout_width="85dp"
         android:layout_height="51dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="84dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -152,4 +156,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.873" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="177dp"
+        android:layout_height="296dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="195dp"
+        tools:layout_editor_absoluteY="16dp" />
 </android.support.constraint.ConstraintLayout>

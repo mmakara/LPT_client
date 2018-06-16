@@ -1,12 +1,9 @@
 package com.lpt.lpt_v4;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -29,7 +26,6 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import org.json.JSONException;
@@ -263,13 +259,13 @@ public class RegisterActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = "http://lpt.mycibox.com/user/new";
+        String url = "http://lpt2.mycibox.com/user/new";
 
         final TextView tvFirstName = (TextView) findViewById(R.id.firstNameInput);
 
         final TextView tvUsername = (TextView) findViewById(R.id.userNameInput);
         final TextView tvEmail = (TextView) findViewById(R.id.emailInput);
-        final TextView tvPassword = (TextView) findViewById(R.id.passwordInput);
+        final TextView tvPassword = (TextView) findViewById(R.id.loginPassword);
         final Spinner typSpinner = (Spinner) findViewById(R.id.rodzajeKontSpinner);
 
         String first_name = tvFirstName.getText().toString();
@@ -295,7 +291,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
-//                        mTextView.setText("Response: " + response.toString());
+                        TextView tv3 = (TextView) findViewById(R.id.textView3);
+                        tv3.setText("Response: " + response.toString());
 //                        String name = response.optString("username");
                         int ok = 0;
 

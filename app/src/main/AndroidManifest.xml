@@ -26,11 +26,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".SecondScreenActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoggedInActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".SearchResultActivity"></activity>
+        <activity android:name=".SearchResultActivity" />
+        <activity android:name=".JobsUserActivity" />
+        <activity android:name=".JobsTechnicianActivity" />
+        <activity android:name=".ProfileUser" />
+        <activity android:name=".ProfileTechnician" />
+        <activity android:name=".ReviewsActivity"></activity>
     </application>
 
 </manifest>
