@@ -161,8 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 LoggedInActivity.class
         );
 //
-        String respx = response.toString();
-        startSecondScreenIntent.putExtra("klucz", respx);
+        startSecondScreenIntent.putExtra("user", response.toString());
         startActivity(startSecondScreenIntent);
     }
 }
