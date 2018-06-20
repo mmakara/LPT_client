@@ -36,7 +36,9 @@
         <activity android:name=".ProfileUser" />
         <activity android:name=".ProfileTechnician" />
         <activity android:name=".ReviewsActivity" />
-        <activity android:name=".NewJobActivity"></activity>
+        <activity android:name=".NewJobActivity" />
+        <activity android:name=".JobDetails"/>
+        <activity android:name=".MessageDetails"/>
     </application>
 
 </manifest>

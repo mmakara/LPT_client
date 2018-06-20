@@ -10,18 +10,20 @@
     <LinearLayout
         android:id="@+id/jobs_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="453dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/pageTitle"
-            android:layout_width="match_parent"
-            android:layout_height="197dp"
-            android:text="Messages Container" />
-    </LinearLayout>
 
+        <TableLayout
+            android:id="@+id/messagesTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </TableLayout>
+
+    </LinearLayout>
     <Button
-        android:id="@+id/newJobBtn2"
+        android:id="@+id/getReceivedBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -30,19 +32,19 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/deleteProfileBtn"
+        android:id="@+id/getSentBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Sent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/deledteProfileBtn"
+        app:layout_constraintEnd_toStartOf="@+id/getArchivedBtn"
         app:layout_constraintHorizontal_bias="0.538"
-        app:layout_constraintStart_toEndOf="@+id/newJobBtn2" />
+        app:layout_constraintStart_toEndOf="@+id/getReceivedBtn" />
 
     <Button
-        android:id="@+id/deledteProfileBtn"
+        android:id="@+id/getArchivedBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"

@@ -88,5 +88,6 @@ public class NewJobActivity extends AppCompatActivity {
 
     private void logSuccess() {
         Utils.log(getApplicationContext(), "some msg");
+
     }
 }

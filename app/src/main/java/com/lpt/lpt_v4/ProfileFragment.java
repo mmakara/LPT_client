@@ -27,7 +27,7 @@ public class ProfileFragment extends Fragment {
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
-
+        ft.addToBackStack(null);
         ft.replace(R.id.profile_container, UserFormFragment.newInstance(active_user));
         ft.commit();
     }

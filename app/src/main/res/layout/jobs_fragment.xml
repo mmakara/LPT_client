@@ -22,11 +22,6 @@
 
             </TableLayout>
 
-        <TextView
-            android:id="@+id/pageTitle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Jobs Container" />
     </LinearLayout>
 
     <Button
@@ -37,12 +32,12 @@
         android:layout_marginStart="80dp"
         android:text="Active"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/deleteProfileBtn"
+        app:layout_constraintEnd_toStartOf="@+id/getSentBtn"
         app:layout_constraintHorizontal_bias="0.809"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/newJobBtn2"
+        android:id="@+id/getReceivedBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
@@ -52,7 +47,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/deleteProfileBtn"
+        android:id="@+id/getSentBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

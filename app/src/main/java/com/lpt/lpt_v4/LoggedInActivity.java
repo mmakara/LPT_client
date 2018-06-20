@@ -46,7 +46,7 @@ public class LoggedInActivity extends AppCompatActivity {
     protected void loadFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
-
+        ft.addToBackStack(null);
         ft.replace(R.id.content_frame, fragment);
         ft.commit();
     }
@@ -75,7 +75,7 @@ public class LoggedInActivity extends AppCompatActivity {
         messages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadFragment(MessagesFragment.newInstance());
+                loadFragment(MessagesFragment.newInstance(active_user));
             }
         });
 
