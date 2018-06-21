@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.lpt.lpt_v4.fabryka.FabrykaUzytkownika;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
@@ -25,12 +27,7 @@ public class LoggedInActivity extends AppCompatActivity {
 
         try {
             JSONObject userJsonObject = new JSONObject(getIntent().getStringExtra("user"));
-            active_user = new User();
-            active_user.id = userJsonObject.getString("id");
-            active_user.first_name = userJsonObject.getString("first_name");
-            active_user.username = userJsonObject.getString("username");
-            active_user.email = userJsonObject.getString("email");
-            active_user.account_type = userJsonObject.getString("account_type");
+            active_user = FabrykaUzytkownika.zApi(userJsonObject);
 
             TextView tvLoginResponse = (TextView) findViewById(R.id.loginResponse);
             tvLoginResponse.setText(getIntent().getStringExtra("user"));

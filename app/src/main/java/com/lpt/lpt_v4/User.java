@@ -7,4 +7,6 @@ public class User {
     public String first_name;
     public String email;
     public String account_type;
+    public String lat;
+    public String lng;
 }

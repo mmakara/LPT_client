@@ -61,6 +61,8 @@ public class JobsFragment extends Fragment {
                 );
 
                 newJobIntent.putExtra("user_id", active_user.id);
+                newJobIntent.putExtra("job_lat", active_user.lat);
+                newJobIntent.putExtra("job_lng", active_user.lng);
                 startActivity(newJobIntent);
             }
         });

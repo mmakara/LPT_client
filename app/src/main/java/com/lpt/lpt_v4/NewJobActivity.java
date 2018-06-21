@@ -21,6 +21,8 @@ import org.json.JSONObject;
 public class NewJobActivity extends AppCompatActivity {
 
     private String user_id;
+    private String job_lat;
+    private String job_lng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,9 @@ public class NewJobActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_job);
 
         user_id = getIntent().getExtras().getString("user_id");
+        job_lat = getIntent().getExtras().getString("job_lat");
+        job_lng = getIntent().getExtras().getString("job_lng");
+
 
         Button addJobBtn = (Button) findViewById(R.id.addJobBtn);
         addJobBtn.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +62,8 @@ public class NewJobActivity extends AppCompatActivity {
         newJobData.put("user_id", user_id);
         newJobData.put("title", job_title);
         newJobData.put("description", job_description);
+        newJobData.put("lat", job_lat);
+        newJobData.put("lng", job_lng);
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
