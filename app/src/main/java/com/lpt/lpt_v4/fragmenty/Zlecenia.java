@@ -1,4 +1,4 @@
-package com.lpt.lpt_v4;
+package com.lpt.lpt_v4.fragmenty;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,18 +16,23 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.lpt.lpt_v4.Uzytkownik;
+import com.lpt.lpt_v4.aktywnosci.NoweZlecenie;
+import com.lpt.lpt_v4.R;
+import com.lpt.lpt_v4.Tools;
+import com.lpt.lpt_v4.aktywnosci.SzczegolyZlecenia;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class JobsFragment extends Fragment {
-    private User active_user;
+public class Zlecenia extends Fragment {
+    private Uzytkownik active_uzytkownik;
     private JSONArray jobs;
 
-    public static JobsFragment newInstance(User user) {
-        JobsFragment job_fragment = new JobsFragment();
-        job_fragment.active_user = user;
+    public static Zlecenia newInstance(Uzytkownik uzytkownik) {
+        Zlecenia job_fragment = new Zlecenia();
+        job_fragment.active_uzytkownik = uzytkownik;
 
         return job_fragment;
     }
@@ -44,7 +49,7 @@ public class JobsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            fetch_jobs(active_user.id);
+            fetch_jobs(active_uzytkownik.id);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -57,12 +62,12 @@ public class JobsFragment extends Fragment {
             public void onClick(View view) {
                 Intent newJobIntent = new Intent(
                         getContext(),
-                        NewJobActivity.class
+                        NoweZlecenie.class
                 );
 
-                newJobIntent.putExtra("user_id", active_user.id);
-                newJobIntent.putExtra("job_lat", active_user.lat);
-                newJobIntent.putExtra("job_lng", active_user.lng);
+                newJobIntent.putExtra("user_id", active_uzytkownik.id);
+                newJobIntent.putExtra("job_lat", active_uzytkownik.lat);
+                newJobIntent.putExtra("job_lng", active_uzytkownik.lng);
                 startActivity(newJobIntent);
             }
         });
@@ -80,13 +85,13 @@ public class JobsFragment extends Fragment {
                             onJobsResponse(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Utils.log(getContext(), "JSON error loading jobs!");
+                            Tools.log(getContext(), "JSON error loading jobs!");
                         }
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Utils.log(getContext(), "Server error loading jobs!");
+                        Tools.log(getContext(), "Server error loading jobs!");
                     }
                 });
 
@@ -116,7 +121,7 @@ public class JobsFragment extends Fragment {
         title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent JobDetails = new Intent(getContext(), JobDetails.class);
+                Intent JobDetails = new Intent(getContext(), SzczegolyZlecenia.class);
                 JobDetails.putExtra("job", jsonJob.toString());
                 startActivity(JobDetails);
             }

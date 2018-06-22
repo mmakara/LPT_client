@@ -25,20 +25,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecondScreenActivity" />
-        <activity android:name=".LoggedInActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".SearchResultActivity" />
-        <activity android:name=".JobsUserActivity" />
-        <activity android:name=".JobsTechnicianActivity" />
-        <activity android:name=".ProfileUser" />
-        <activity android:name=".ProfileTechnician" />
-        <activity android:name=".ReviewsActivity" />
-        <activity android:name=".NewJobActivity" />
-        <activity android:name=".JobDetails"/>
-        <activity android:name=".MessageDetails"/>
+        <activity android:name=".aktywnosci.EkranUzytkownika" />
+        <activity android:name=".aktywnosci.NoweKonto" />
+        <activity android:name=".aktywnosci.NoweZlecenie" />
+        <activity android:name=".aktywnosci.SzczegolyZlecenia"/>
+        <activity android:name=".aktywnosci.SzczegolyWiadomosci"/>
     </application>
 
 </manifest>

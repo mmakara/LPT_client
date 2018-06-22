@@ -1,4 +1,4 @@
-package com.lpt.lpt_v4;
+package com.lpt.lpt_v4.fragmenty;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,21 +15,24 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.lpt.lpt_v4.R;
+import com.lpt.lpt_v4.Uzytkownik;
+import com.lpt.lpt_v4.Tools;
+import com.lpt.lpt_v4.aktywnosci.SzczegolyWiadomosci;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MessagesFragment extends Fragment {
-    private User active_user;
+public class Wiadomosci extends Fragment {
+    private Uzytkownik active_uzytkownik;
     private JSONArray messages;
     protected View view;
 
-    public static MessagesFragment newInstance(User user) {
-        MessagesFragment msgFragment = new MessagesFragment();
-        msgFragment.active_user = user;
+    public static Wiadomosci newInstance(Uzytkownik uzytkownik) {
+        Wiadomosci msgFragment = new Wiadomosci();
+        msgFragment.active_uzytkownik = uzytkownik;
 
         return msgFragment;
     }
@@ -46,7 +49,7 @@ public class MessagesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            fetchMessages(active_user.id, "received");
+            fetchMessages(active_uzytkownik.id, "received");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -55,7 +58,7 @@ public class MessagesFragment extends Fragment {
     protected void fetchMessages(String user_id, String message_type) throws JSONException {
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String url = "http://lpt2.mycibox.com/message/get_" + message_type + "/" + user_id;
-        Utils.log(getContext(), "Fetching "+message_type);
+        Tools.log(getContext(), "Fetching "+message_type);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -63,17 +66,17 @@ public class MessagesFragment extends Fragment {
                     public void onResponse(JSONArray response) {
                         try {
                             onMessagesResponse(response);
-                            Utils.log(getContext(), "Messages fetched!");
+                            Tools.log(getContext(), "Messages fetched!");
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Utils.log(getContext(), "JSON error loading jobs!");
+                            Tools.log(getContext(), "JSON error loading jobs!");
                         }
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Utils.log(getContext(), "Server error loading jobs!");
+                        Tools.log(getContext(), "Server error loading jobs!");
                     }
                 });
 
@@ -112,10 +115,10 @@ public class MessagesFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 try {
-                    fetchMessages(active_user.id, message_type);
+                    fetchMessages(active_uzytkownik.id, message_type);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Utils.log(getContext(), "JSON error loading "+ message_type +" messages!");
+                    Tools.log(getContext(), "JSON error loading "+ message_type +" messages!");
                 }
             }
         });
@@ -144,7 +147,7 @@ public class MessagesFragment extends Fragment {
         title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent MessageDetails = new Intent(getContext(), MessageDetails.class);
+                Intent MessageDetails = new Intent(getContext(), SzczegolyWiadomosci.class);
                 MessageDetails.putExtra("message", jsonMessage.toString());
                 startActivity(MessageDetails);
             }

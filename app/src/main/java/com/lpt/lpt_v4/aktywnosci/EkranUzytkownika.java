@@ -1,6 +1,5 @@
-package com.lpt.lpt_v4;
+package com.lpt.lpt_v4.aktywnosci;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,15 +9,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.lpt.lpt_v4.Uzytkownik;
+import com.lpt.lpt_v4.fragmenty.Wiadomosci;
+import com.lpt.lpt_v4.fragmenty.EdycjaProfilu;
+import com.lpt.lpt_v4.R;
 import com.lpt.lpt_v4.fabryka.FabrykaUzytkownika;
+import com.lpt.lpt_v4.fragmenty.Zlecenia;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-public class LoggedInActivity extends AppCompatActivity {
+public class EkranUzytkownika extends AppCompatActivity {
 
-    private User active_user = null;
+    private Uzytkownik active_uzytkownik = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +30,13 @@ public class LoggedInActivity extends AppCompatActivity {
 
         try {
             JSONObject userJsonObject = new JSONObject(getIntent().getStringExtra("user"));
-            active_user = FabrykaUzytkownika.zApi(userJsonObject);
+            active_uzytkownik = FabrykaUzytkownika.zApi(userJsonObject);
 
             TextView tvLoginResponse = (TextView) findViewById(R.id.loginResponse);
             tvLoginResponse.setText(getIntent().getStringExtra("user"));
 
             setupFragmentButtons();
-            loadFragment(ProfileFragment.newInstance(active_user));
+            loadFragment(EdycjaProfilu.newInstance(active_uzytkownik));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -57,7 +60,7 @@ public class LoggedInActivity extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadFragment(ProfileFragment.newInstance(active_user));
+                loadFragment(EdycjaProfilu.newInstance(active_uzytkownik));
             }
         });
 
@@ -65,14 +68,14 @@ public class LoggedInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                loadFragment(JobsFragment.newInstance(active_user));
+                loadFragment(Zlecenia.newInstance(active_uzytkownik));
             }
         });
 
         messages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadFragment(MessagesFragment.newInstance(active_user));
+                loadFragment(Wiadomosci.newInstance(active_uzytkownik));
             }
         });
 

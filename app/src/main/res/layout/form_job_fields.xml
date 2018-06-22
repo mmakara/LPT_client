@@ -30,25 +30,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/latitude_label2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="LAT:"
-        app:layout_constraintEnd_toStartOf="@+id/latitude_text"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="390dp" />
-
-    <TextView
-        android:id="@+id/longitude_label2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="LONG:"
-        tools:layout_editor_absoluteX="304dp"
-        tools:layout_editor_absoluteY="390dp" />
-
     <EditText
         android:id="@+id/latitude_text"
         android:layout_width="0dp"

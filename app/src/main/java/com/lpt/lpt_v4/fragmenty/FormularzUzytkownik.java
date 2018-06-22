@@ -1,21 +1,22 @@
-package com.lpt.lpt_v4;
+package com.lpt.lpt_v4.fragmenty;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class UserFormFragment extends Fragment {
-    public User active_user;
+import com.lpt.lpt_v4.R;
+import com.lpt.lpt_v4.Uzytkownik;
 
-    public static UserFormFragment newInstance(@Nullable User user) {
-        UserFormFragment uff = new UserFormFragment();
-        if(user != null) {
-            uff.active_user = user;
+public class FormularzUzytkownik extends Fragment {
+    public Uzytkownik active_uzytkownik;
+
+    public static FormularzUzytkownik newInstance(@Nullable Uzytkownik uzytkownik) {
+        FormularzUzytkownik uff = new FormularzUzytkownik();
+        if(uzytkownik != null) {
+            uff.active_uzytkownik = uzytkownik;
         }
 
         return uff;
@@ -26,15 +27,15 @@ public class UserFormFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.form_user_fields, container, false);
 
-        if(active_user != null) {
+        if(active_uzytkownik != null) {
             TextView tvUsername = (TextView) view.findViewById(R.id.userNameInput);
             TextView tvEmail = (TextView) view.findViewById(R.id.emailInput);
             TextView tvName = (TextView) view.findViewById(R.id.firstNameInput);
             TextView tvPassword = (TextView) view.findViewById(R.id.loginPassword);
-            tvUsername.setText(active_user.username);
-            tvPassword.setText(active_user.password);
-            tvName.setText(active_user.first_name);
-            tvEmail.setText(active_user.email);
+            tvUsername.setText(active_uzytkownik.username);
+            tvPassword.setText(active_uzytkownik.password);
+            tvName.setText(active_uzytkownik.first_name);
+            tvEmail.setText(active_uzytkownik.email);
         }
 
         return view;
@@ -44,7 +45,7 @@ public class UserFormFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(active_user != null) {
+        if(active_uzytkownik != null) {
 
         }
     }

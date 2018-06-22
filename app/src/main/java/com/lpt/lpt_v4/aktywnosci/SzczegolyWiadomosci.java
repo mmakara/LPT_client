@@ -1,12 +1,9 @@
-package com.lpt.lpt_v4;
+package com.lpt.lpt_v4.aktywnosci;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -15,12 +12,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.lpt.lpt_v4.R;
+import com.lpt.lpt_v4.Tools;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MessageDetails extends AppCompatActivity {
+public class SzczegolyWiadomosci extends AppCompatActivity {
     private JSONObject current_message;
     private JSONObject current_user;
 
@@ -59,7 +57,7 @@ public class MessageDetails extends AppCompatActivity {
 //                tabelaAplikacji.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
 //            }
         } catch (JSONException e) {
-            Utils.log(getApplicationContext(), "Can't set message details! :( "+e.getMessage()+" --- "+e.getCause());
+            Tools.log(getApplicationContext(), "Can't set message details! :( "+e.getMessage()+" --- "+e.getCause());
         }
     }
 
@@ -117,7 +115,7 @@ public class MessageDetails extends AppCompatActivity {
 ////        int 4 =
 //        Intent startSecondScreenIntent = new Intent(
 //                getApplicationContext(),
-//                LoggedInActivity.class
+//                EkranUzytkownika.class
 //        );
 ////
 //        startSecondScreenIntent.putExtra("user", response.toString());

@@ -5,7 +5,7 @@
     android:id="@+id/registerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".aktywnosci.NoweKonto">
 
     <TextView
         android:id="@+id/textView2"
@@ -40,7 +40,7 @@
         android:ems="10"
         android:hint="Nazwa użytkownika"
         android:inputType="textPersonName"
-        android:text="user"
+        android:text="uzytkownik"
         app:layout_constraintBottom_toTopOf="@+id/emailInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.094"
@@ -158,7 +158,7 @@
         app:layout_constraintVertical_bias="0.873" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/odpowiedz"
         android:layout_width="177dp"
         android:layout_height="296dp"
         android:text="TextView"

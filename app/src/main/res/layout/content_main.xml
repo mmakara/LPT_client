@@ -27,7 +27,7 @@
         app:layout_constraintGuide_begin="20dp" />
 
     <Button
-        android:id="@+id/newAccountBtn"
+        android:id="@+id/noweKontoBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -40,7 +40,7 @@
         app:layout_constraintVertical_bias="0.128" />
 
     <Button
-        android:id="@+id/loginBtn"
+        android:id="@+id/logowanieBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -53,15 +53,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginPassword"
         app:layout_constraintVertical_bias="0.133" />
-
-    <Button
-        android:id="@+id/searchBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:text="SZUKAJ"
-        app:layout_constraintTop_toBottomOf="@+id/newAccountBtn"
-        tools:layout_editor_absoluteX="148dp" />
 
     <EditText
         android:id="@+id/loginUser"

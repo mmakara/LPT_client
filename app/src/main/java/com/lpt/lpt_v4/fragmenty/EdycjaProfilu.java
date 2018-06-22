@@ -1,4 +1,4 @@
-package com.lpt.lpt_v4;
+package com.lpt.lpt_v4.fragmenty;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,13 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ProfileFragment extends Fragment {
-    public User active_user;
+import com.lpt.lpt_v4.R;
+import com.lpt.lpt_v4.Uzytkownik;
 
-    public static ProfileFragment newInstance(@Nullable  User user) {
-        ProfileFragment pf = new ProfileFragment();
-        if(user != null) {
-            pf.active_user = user;
+public class EdycjaProfilu extends Fragment {
+    public Uzytkownik active_uzytkownik;
+
+    public static EdycjaProfilu newInstance(@Nullable Uzytkownik uzytkownik) {
+        EdycjaProfilu pf = new EdycjaProfilu();
+        if(uzytkownik != null) {
+            pf.active_uzytkownik = uzytkownik;
         }
 
         return pf;
@@ -28,7 +31,7 @@ public class ProfileFragment extends Fragment {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.addToBackStack(null);
-        ft.replace(R.id.profile_container, UserFormFragment.newInstance(active_user));
+        ft.replace(R.id.profile_container, FormularzUzytkownik.newInstance(active_uzytkownik));
         ft.commit();
     }
 
@@ -38,7 +41,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
-        loadFragment(UserFormFragment.newInstance(this.active_user));
+        loadFragment(FormularzUzytkownik.newInstance(this.active_uzytkownik));
 
         return view;
     }

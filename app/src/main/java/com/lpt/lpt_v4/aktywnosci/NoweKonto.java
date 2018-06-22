@@ -1,4 +1,5 @@
-package com.lpt.lpt_v4;
+package com.lpt.lpt_v4.aktywnosci;
+import com.lpt.lpt_v4.Tools;
 
 import android.Manifest;
 import android.content.Intent;
@@ -27,15 +28,20 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.lpt.lpt_v4.AdresyApi;
+import com.lpt.lpt_v4.BuildConfig;
+import com.lpt.lpt_v4.R;
+import com.lpt.lpt_v4.Tools;
+import com.lpt.lpt_v4.fabryka.FabrykaUzytkownika;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Locale;
 
-public class RegisterActivity extends AppCompatActivity {
+public class NoweKonto extends AppCompatActivity {
 
-    private static final String TAG = RegisterActivity.class.getSimpleName();
+    private static final String TAG = NoweKonto.class.getSimpleName();
 
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
@@ -169,7 +175,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void startLocationPermissionRequest() {
-        ActivityCompat.requestPermissions(RegisterActivity.this,
+        ActivityCompat.requestPermissions(NoweKonto.this,
                 new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                 REQUEST_PERMISSIONS_REQUEST_CODE);
     }
@@ -218,39 +224,20 @@ public class RegisterActivity extends AppCompatActivity {
             if (grantResults.length <= 0) {
                 // If user interaction was interrupted, the permission request is cancelled and you
                 // receive empty arrays.
-                Log.i(TAG, "User interaction was cancelled.");
+                Log.i(TAG, "Uzytkownik interaction was cancelled.");
             } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted.
                 getLastLocation();
             } else {
-                // Permission denied.
-
-                // Notify the user via a SnackBar that they have rejected a core permission for the
-                // app, which makes the Activity useless. In a real app, core permissions would
-                // typically be best requested during a welcome-screen flow.
-
-                // Additionally, it is important to remember that a permission might have been
-                // rejected without asking the user for permission (device policy or "Never ask
-                // again" prompts). Therefore, a user interface affordance is typically implemented
-                // when permissions are denied. Otherwise, your app could appear unresponsive to
-                // touches or interactions which have required permissions.
                 int start_location = 3;
-
-//                showSnackbar(R.string.permission_denied_explanation, R.string.settings,
-//                        new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-                                // Build intent that displays the App settings screen.
-                                Intent intent = new Intent();
-                                intent.setAction(
-                                        Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                Uri uri = Uri.fromParts("package",
-                                        BuildConfig.APPLICATION_ID, null);
-                                intent.setData(uri);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-//                            }
-//                        });
+                Intent intent = new Intent();
+                intent.setAction(
+                        Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package",
+                        BuildConfig.APPLICATION_ID, null);
+                intent.setData(uri);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         }
     }
@@ -259,51 +246,37 @@ public class RegisterActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String url = "http://lpt2.mycibox.com/user/new";
+        String first_name = Tools.stringZTextView(findViewById(R.id.firstNameInput));
+        String username = Tools.stringZTextView(findViewById(R.id.userNameInput));
+        String email = Tools.stringZTextView(findViewById(R.id.emailInput));
+        String password = Tools.stringZTextView(findViewById(R.id.loginPassword));
+        String typ = Tools.stringZTextView(findViewById(R.id.rodzajeKontSpinner));
 
-        final TextView tvFirstName = (TextView) findViewById(R.id.firstNameInput);
-
-        final TextView tvUsername = (TextView) findViewById(R.id.userNameInput);
-        final TextView tvEmail = (TextView) findViewById(R.id.emailInput);
-        final TextView tvPassword = (TextView) findViewById(R.id.loginPassword);
-        final Spinner typSpinner = (Spinner) findViewById(R.id.rodzajeKontSpinner);
-
-        String first_name = tvFirstName.getText().toString();
-        String username = tvUsername.getText().toString();
-        String email = tvEmail.getText().toString();
-        String password = tvPassword.getText().toString();
-        String typ = typSpinner.getSelectedItem().toString();
-
-
-        JSONObject newUserData = new JSONObject();
-        newUserData.put("first_name", first_name);
-        newUserData.put("username", username);
-        newUserData.put("lat", user_lat);
-        newUserData.put("lng", user_lng);
-        newUserData.put("email", email);
-        newUserData.put("password", password);
-        newUserData.put("rodzaj_konta", typ);
-
-//        final TextView mTextView = (TextView) findViewById(R.id.secondScreenResult);
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST, url, newUserData, new Response.Listener<JSONObject>() {
-
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                AdresyApi.nowe_konto,
+                FabrykaUzytkownika.doNowegoKonta(
+                        first_name,
+                        username,
+                        user_lat,
+                        user_lng,
+                        email,
+                        password,
+                        typ
+                ),
+                //funkcja sukces
+                new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        TextView tv3 = (TextView) findViewById(R.id.textView3);
+                        TextView tv3 = (TextView) findViewById(R.id.odpowiedz);
                         tv3.setText("Response: " + response.toString());
-//                        String name = response.optString("username");
-                        int ok = 0;
-
                     }
-                }, new Response.ErrorListener() {
-
+                },
+                //funkcja blad
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-                        int xd = 0;
-
+                     Tools.log(getApplicationContext(), "Blad serwera");
                     }
                 });
 
