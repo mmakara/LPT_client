@@ -2,13 +2,12 @@ package com.lpt.lpt_v4.fragmenty;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.lpt.lpt_v4.R;
+import com.lpt.lpt_v4.Tools;
 import com.lpt.lpt_v4.Uzytkownik;
 
 public class EdycjaProfilu extends Fragment {
@@ -27,28 +26,22 @@ public class EdycjaProfilu extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.addToBackStack(null);
-        ft.replace(R.id.profile_container, FormularzUzytkownik.newInstance(active_uzytkownik));
-        ft.commit();
+        Tools.wczytajFragment(
+                getFragmentManager(),
+                FormularzUzytkownik.newInstance(active_uzytkownik),
+                R.id.profile_container
+        );
     }
-
-
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
-        loadFragment(FormularzUzytkownik.newInstance(this.active_uzytkownik));
 
         return view;
     }
 
-    protected void loadFragment(Fragment fragment) {
 
-    }
 
 
 }

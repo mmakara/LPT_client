@@ -21,14 +21,14 @@
             android:id="@+id/messageDetails_subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Message subject" />
+            android:text="Temat:" />
 
 
         <TextView
             android:id="@+id/messageDetails_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Message body" />
+            android:text="Wiadomosc:" />
 
     </LinearLayout>
 

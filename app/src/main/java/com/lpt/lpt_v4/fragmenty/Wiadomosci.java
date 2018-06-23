@@ -25,7 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Wiadomosci extends Fragment {
+public class Wiadomosci extends Fragment implements View.OnClickListener {
     private Uzytkownik active_uzytkownik;
     private JSONArray messages;
     protected View view;
@@ -40,7 +40,6 @@ public class Wiadomosci extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.messages_fragment, container, false);
-        setup_messages_buttons();
 
         return this.view;
     }
@@ -48,14 +47,11 @@ public class Wiadomosci extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try {
-            fetchMessages(active_uzytkownik.id, "received");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
+        fetchMessages(active_uzytkownik.id, "received");
     }
 
-    protected void fetchMessages(String user_id, String message_type) throws JSONException {
+    protected void fetchMessages(String user_id, String message_type)  {
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String url = "http://lpt2.mycibox.com/message/get_" + message_type + "/" + user_id;
         Tools.log(getContext(), "Fetching "+message_type);
@@ -83,51 +79,27 @@ public class Wiadomosci extends Fragment {
         queue.add(jsonArrayRequest);
     }
 
-    private void setup_messages_buttons() {
-        setup_received_button();
-        setup_sent_button();
-        setup_archived_button();
+    @Override
+    public void onClick(View v){
+        switch (v.getId()) {
+            case R.id.getReceivedBtn:
+                fetchMessages(active_uzytkownik.id, "received");
+                break;
+            case R.id.getSentBtn:
+                fetchMessages(active_uzytkownik.id, "sent");
+                break;
+            case R.id.getArchivedBtn:
+                fetchMessages(active_uzytkownik.id, "archived");
+                break;
+            default:
+                break;
+        }
     }
 
-    private void setup_received_button() {
-        setup_message_button(
-                (Button) view.findViewById(R.id.getReceivedBtn),
-                "received"
-        );
-    }
-
-    private void setup_sent_button() {
-        setup_message_button(
-                (Button) view.findViewById(R.id.getSentBtn),
-                "sent"
-        );
-    }
-
-    private void setup_archived_button() {
-        setup_message_button(
-                (Button) view.findViewById(R.id.getArchivedBtn),
-                "archived"
-        );
-    }
-
-    private void setup_message_button(Button btn, final String message_type) {
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    fetchMessages(active_uzytkownik.id, message_type);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Tools.log(getContext(), "JSON error loading "+ message_type +" messages!");
-                }
-            }
-        });
-    }
 
     private void onMessagesResponse(JSONArray response) throws JSONException
     {
         messages = response;
-
         TableLayout messagesTable = (TableLayout) getView().findViewById(R.id.messagesTable);
         messagesTable.removeAllViews();
 
@@ -138,7 +110,6 @@ public class Wiadomosci extends Fragment {
     }
 
     private TableRow build_message_row(final JSONObject jsonMessage) throws JSONException {
-
         TableRow table_row = new TableRow(getContext());
 
         TextView title = new TextView(getContext());

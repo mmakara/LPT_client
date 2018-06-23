@@ -32,7 +32,7 @@ import com.lpt.lpt_v4.AdresyApi;
 import com.lpt.lpt_v4.BuildConfig;
 import com.lpt.lpt_v4.R;
 import com.lpt.lpt_v4.Tools;
-import com.lpt.lpt_v4.fabryka.FabrykaUzytkownika;
+import com.lpt.lpt_v4.fabryka.FabrykaUzytkownikow;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,10 +45,6 @@ public class NoweKonto extends AppCompatActivity {
 
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
-    private String mLatitudeLabel;
-    private String mLongitudeLabel;
-//    private TextView mLatitudeText;
-    private TextView mLongitudeText;
 
     /**
      * Provides the entry point to the Fused Location Provider API.
@@ -68,16 +64,9 @@ public class NoweKonto extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mLatitudeLabel = getResources().getString(R.string.latitude_label);
-        mLongitudeLabel = getResources().getString(R.string.longitude_label);
-
-        TextView mLatitudeText = (TextView) findViewById(R.id.latitude_text);
-        mLongitudeText = (TextView) findViewById(R.id.longitude_text);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-
         setContentView(R.layout.activity_register);
-        add_spinner();
         add_register_on_click();
     }
 
@@ -123,27 +112,13 @@ public class NoweKonto extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful() && task.getResult() != null) {
                             mLastLocation = task.getResult();
-                            TextView mLatitudeText = (TextView) findViewById(R.id.latitude_text);
-                            TextView mLongitudeText = (TextView) findViewById(R.id.longitude_text);
 
-                            mLatitudeText.setText(String.format(Locale.ENGLISH, "%s: %f",
-                                    mLatitudeLabel,
-                                    mLastLocation.getLatitude()));
 
-                            user_lat = String.format(Locale.ENGLISH, "%s: %f",
-                                    mLatitudeLabel,
+                            user_lat = String.format(Locale.ENGLISH, "%f",
                                     mLastLocation.getLatitude());
 
-
-                            mLongitudeText.setText(String.format(Locale.ENGLISH, "%s: %f",
-                                    mLongitudeLabel,
-                                    mLastLocation.getLongitude()));
-
-                            user_lng = String.format(Locale.ENGLISH, "%s: %f",
-                                    mLongitudeLabel,
+                            user_lng = String.format(Locale.ENGLISH, "%f",
                                     mLastLocation.getLongitude());
-
-
                         } else {
                             Log.w(TAG, "getLastLocation:exception", task.getException());
 //                            showSnackbar(getString(R.string.no_location_detected));1
@@ -250,33 +225,32 @@ public class NoweKonto extends AppCompatActivity {
         String username = Tools.stringZTextView(findViewById(R.id.userNameInput));
         String email = Tools.stringZTextView(findViewById(R.id.emailInput));
         String password = Tools.stringZTextView(findViewById(R.id.loginPassword));
-        String typ = Tools.stringZTextView(findViewById(R.id.rodzajeKontSpinner));
+        Spinner typ = (Spinner) findViewById(R.id.rodzajeKontSpinner);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.POST,
                 AdresyApi.nowe_konto,
-                FabrykaUzytkownika.doNowegoKonta(
+                FabrykaUzytkownikow.doNowegoKonta(
                         first_name,
                         username,
                         user_lat,
                         user_lng,
                         email,
                         password,
-                        typ
+                        typ.getSelectedItem().toString()
                 ),
                 //funkcja sukces
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        TextView tv3 = (TextView) findViewById(R.id.odpowiedz);
-                        tv3.setText("Response: " + response.toString());
+                        Tools.log(getApplicationContext(), response.toString());
                     }
                 },
                 //funkcja blad
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                     Tools.log(getApplicationContext(), "Blad serwera");
+                     Tools.log(getApplicationContext(), "Blad po stronie serwera");
                     }
                 });
 

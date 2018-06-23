@@ -1,27 +1,24 @@
 package com.lpt.lpt_v4.aktywnosci;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
+import com.lpt.lpt_v4.Aktywnosc;
+import com.lpt.lpt_v4.Tools;
 import com.lpt.lpt_v4.Uzytkownik;
 import com.lpt.lpt_v4.fragmenty.Wiadomosci;
 import com.lpt.lpt_v4.fragmenty.EdycjaProfilu;
 import com.lpt.lpt_v4.R;
-import com.lpt.lpt_v4.fabryka.FabrykaUzytkownika;
+import com.lpt.lpt_v4.fabryka.FabrykaUzytkownikow;
 import com.lpt.lpt_v4.fragmenty.Zlecenia;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class EkranUzytkownika extends AppCompatActivity {
+public class EkranUzytkownika extends Aktywnosc implements View.OnClickListener {
 
-    private Uzytkownik active_uzytkownik = null;
+    private Uzytkownik uzytkownik = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,64 +26,44 @@ public class EkranUzytkownika extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         try {
-            JSONObject userJsonObject = new JSONObject(getIntent().getStringExtra("user"));
-            active_uzytkownik = FabrykaUzytkownika.zApi(userJsonObject);
+            JSONObject uzytkownikJson = new JSONObject(getIntent().getStringExtra("uzytkownik"));
+            uzytkownik = FabrykaUzytkownikow.zApi(uzytkownikJson);
 
-            TextView tvLoginResponse = (TextView) findViewById(R.id.loginResponse);
-            tvLoginResponse.setText(getIntent().getStringExtra("user"));
+            ustawPrzycisk(R.id.openProfileBtn);
+            ustawPrzycisk(R.id.openJobsBtn);
+            ustawPrzycisk(R.id.openMessagesBtn);
 
-            setupFragmentButtons();
-            loadFragment(EdycjaProfilu.newInstance(active_uzytkownik));
+            wczytajFragment(EdycjaProfilu.newInstance(uzytkownik));
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
     }
 
-    protected void loadFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.addToBackStack(null);
-        ft.replace(R.id.content_frame, fragment);
-        ft.commit();
+    protected void wczytajFragment(Fragment fragment) {
+        Tools.wczytajFragment(
+                getSupportFragmentManager(),
+                fragment,
+                R.id.content_frame
+        );
     }
 
-    public void setupFragmentButtons() {
 
-        Button profile = (Button) findViewById(R.id.openProfileBtn);
-        Button jobs = (Button) findViewById(R.id.openJobsBtn);
-        Button messages = (Button) findViewById(R.id.openMessagesBtn);
-
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadFragment(EdycjaProfilu.newInstance(active_uzytkownik));
-            }
-        });
-
-        jobs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                loadFragment(Zlecenia.newInstance(active_uzytkownik));
-            }
-        });
-
-        messages.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadFragment(Wiadomosci.newInstance(active_uzytkownik));
-            }
-        });
-
-//
-//        messages.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                loadFragment(Fragment3.newInstance());
-//            }
-//        });
-
+    @Override
+    public void onClick(View v){
+        switch (v.getId()) {
+            case R.id.openProfileBtn:
+                wczytajFragment(EdycjaProfilu.newInstance(uzytkownik));
+                break;
+            case R.id.openJobsBtn:
+                wczytajFragment(Zlecenia.newInstance(uzytkownik));
+                break;
+            case R.id.openMessagesBtn:
+                wczytajFragment(Wiadomosci.newInstance(uzytkownik));
+                break;
+            default:
+                break;
+        }
     }
 
 }

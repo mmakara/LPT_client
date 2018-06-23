@@ -1,14 +1,9 @@
 package com.lpt.lpt_v4;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,39 +13,38 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.lpt.lpt_v4.aktywnosci.EkranUzytkownika;
 import com.lpt.lpt_v4.aktywnosci.NoweKonto;
-import com.lpt.lpt_v4.fabryka.FabrykaUzytkownika;
+import com.lpt.lpt_v4.fabryka.FabrykaUzytkownikow;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Aktywnosc {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        Button noweKontoBtn = (Button) findViewById(R.id.noweKontoBtn);
-        noweKontoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        ustawPrzycisk(R.id.logowanieBtn);
+        ustawPrzycisk(R.id.noweKontoBtn);
+    }
+
+    @Override
+    public void onClick(View v){
+        switch (v.getId()) {
+            case R.id.noweKontoBtn:
                 uruchom_aktywnosc(NoweKonto.class, null, null);
-            }
-        });
-
-        Button logowanieBtn = (Button) findViewById(R.id.logowanieBtn);
-        logowanieBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                break;
+            case R.id.logowanieBtn:
                 try {
                     zaloguj_uzytkownika();
-                } catch (JSONException e) {
-                    log("Blad logowania");
+                } catch (JSONException wyjatek_logowania) {
+                    Tools.log(this, wyjatek_logowania.toString());
                 }
-            }
-        });
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -83,12 +77,12 @@ public class MainActivity extends AppCompatActivity {
         JsonObjectRequest requestLogowanie = new JsonObjectRequest(
                 Request.Method.POST,
                 AdresyApi.logowanie,
-                FabrykaUzytkownika.doLogowania(uzytkownik, haslo),
+                FabrykaUzytkownikow.doLogowania(uzytkownik, haslo),
 //                prawidlowa odpowiedz
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        uruchom_aktywnosc(EkranUzytkownika.class, "user", response.toString());
+                        uruchom_aktywnosc(EkranUzytkownika.class, "uzytkownik", response.toString());
                     }
                 },
 //                blad
@@ -106,20 +100,4 @@ public class MainActivity extends AppCompatActivity {
         Tools.log(getApplicationContext(), wiadomosc);
     }
 
-    private void uruchom_aktywnosc(
-            Class klasa_aktywnosci,
-            @Nullable String extra_klucz,
-            @Nullable String extra_wartosc
-    ) {
-        Intent startSecondScreenIntent = new Intent(
-                getApplicationContext(),
-                klasa_aktywnosci
-        );
-
-        if(extra_klucz != null && extra_wartosc != null) {
-            startSecondScreenIntent.putExtra(extra_klucz, extra_wartosc);
-        }
-
-        startActivity(startSecondScreenIntent);
-    }
 }

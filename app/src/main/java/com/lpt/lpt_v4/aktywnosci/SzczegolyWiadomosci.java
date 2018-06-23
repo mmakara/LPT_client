@@ -18,7 +18,7 @@ import com.lpt.lpt_v4.Tools;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SzczegolyWiadomosci extends AppCompatActivity {
+public class SzczegolyWiadomosci extends AppCompatActivity implements View.OnClickListener {
     private JSONObject current_message;
     private JSONObject current_user;
 
@@ -26,7 +26,6 @@ public class SzczegolyWiadomosci extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_details);
-        setup_reply_button();
 
         TextView subject = findViewById(R.id.messageDetails_subject);
         TextView body = findViewById(R.id.messageDetails_body);
@@ -35,45 +34,11 @@ public class SzczegolyWiadomosci extends AppCompatActivity {
             current_message = new JSONObject(getIntent().getStringExtra("message"));
             subject.setText(current_message.getString("subject"));
             body.setText(current_message.getString("body"));
-
-
-//            final JSONArray aplikacje = current_message.getJSONArray("applicants");
-//            int x = 0;
-
-//            TableLayout tabelaAplikacji = findViewById(R.id.jobDetails_applicants);
-//
-//            for(int i = 0; i<aplikacje.length();i++) {
-//                JSONObject jsonJob = aplikacje.getJSONObject(i);
-//
-//                TableRow tr = new TableRow(getApplicationContext());
-//                tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-//
-//                TextView title = new TextView(getApplicationContext());
-//                title.setText(jsonJob.getString("username"));
-//                title.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-//
-//                tr.addView(title);
-//
-//                tabelaAplikacji.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-//            }
         } catch (JSONException e) {
             Tools.log(getApplicationContext(), "Can't set message details! :( "+e.getMessage()+" --- "+e.getCause());
         }
     }
 
-    private void setup_reply_button() {
-        Button replyBtn = findViewById(R.id.replyBtn);
-        replyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    reply_to_message();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     protected void reply_to_message() throws JSONException {
 
@@ -122,4 +87,18 @@ public class SzczegolyWiadomosci extends AppCompatActivity {
 //        startActivity(startSecondScreenIntent);
     }
 
+    @Override
+    public void onClick(View v){
+        switch (v.getId()) {
+            case R.id.replyBtn:
+                try {
+                    reply_to_message();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                break;
+        }
+    }
 }

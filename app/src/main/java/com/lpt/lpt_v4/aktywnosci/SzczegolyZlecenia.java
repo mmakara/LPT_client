@@ -2,6 +2,7 @@ package com.lpt.lpt_v4.aktywnosci;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -13,7 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SzczegolyZlecenia extends AppCompatActivity {
+public class SzczegolyZlecenia extends AppCompatActivity implements View.OnClickListener {
     private JSONObject current_job;
 
     @Override
@@ -54,4 +55,13 @@ public class SzczegolyZlecenia extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onClick(View v){
+        switch (v.getId()) {
+            case R.id.noweKontoBtn:
+                break;
+            default:
+                break;
+        }
+    }
 }

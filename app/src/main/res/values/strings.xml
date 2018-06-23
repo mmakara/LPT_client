@@ -6,7 +6,7 @@
     <string name="latitude_label">Lat: </string>
     <string name="longitude_label">Lng: </string>
     <string-array name="rodzaje_kont">
-        <item>Użytkownik</item>
+        <item>Uzytkownik</item>
         <item>Technik</item>
     </string-array>
     <string name="title_activity_logged_in_tabs">LoggedInTabs</string>
