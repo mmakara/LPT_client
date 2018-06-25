@@ -14,6 +14,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Klasa aktywności wyświetlającej szczegóły zlecenia.
+ */
 public class SzczegolyZlecenia extends AppCompatActivity implements View.OnClickListener {
     private JSONObject current_job;
 

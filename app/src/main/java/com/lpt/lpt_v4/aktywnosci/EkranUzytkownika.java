@@ -16,6 +16,9 @@ import com.lpt.lpt_v4.fragmenty.Zlecenia;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Klasa aktywności wyświetlanej po udanym zalogowaniu.
+ */
 public class EkranUzytkownika extends Aktywnosc implements View.OnClickListener {
 
     private Uzytkownik uzytkownik = null;

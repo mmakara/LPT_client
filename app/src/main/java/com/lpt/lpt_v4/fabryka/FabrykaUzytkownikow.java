@@ -6,6 +6,9 @@ import com.lpt.lpt_v4.aktywnosci.NoweKonto;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Tworzy obiekty użytkownika na różne potrzeby systemu
+ */
 public class FabrykaUzytkownikow {
     public static Uzytkownik zApi(JSONObject userFromApi) throws JSONException
     {

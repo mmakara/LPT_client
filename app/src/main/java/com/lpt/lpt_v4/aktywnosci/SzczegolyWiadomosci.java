@@ -18,6 +18,9 @@ import com.lpt.lpt_v4.Tools;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Klasa aktywności wyświetlającej wiadomość.
+ */
 public class SzczegolyWiadomosci extends AppCompatActivity implements View.OnClickListener {
     private JSONObject current_message;
     private JSONObject current_user;
@@ -40,6 +43,10 @@ public class SzczegolyWiadomosci extends AppCompatActivity implements View.OnCli
     }
 
 
+    /**
+     * Metoda wysyłanie zapytanie do serwera api tworząc odpowiedź na wiadomość
+     * @throws JSONException
+     */
     protected void reply_to_message() throws JSONException {
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -58,33 +65,18 @@ public class SzczegolyWiadomosci extends AppCompatActivity implements View.OnCli
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        onReplyToMessageResponse(response);
-
+                        Tools.log(getApplicationContext(), "Wiadomość wysłana");
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-                        int xd = 0;
+                        Tools.log(getApplicationContext(), "Bład wysłania");
 
                     }
                 });
 
         queue.add(jsonObjectRequest);
-    }
-
-    public void onReplyToMessageResponse(JSONObject response) {
-//        TextView tv3 = (TextView) findViewById(R.id.textView7);
-//        tv3.setText("Response: " + );
-////        int 4 =
-//        Intent startSecondScreenIntent = new Intent(
-//                getApplicationContext(),
-//                EkranUzytkownika.class
-//        );
-////
-//        startSecondScreenIntent.putExtra("user", response.toString());
-//        startActivity(startSecondScreenIntent);
     }
 
     @Override

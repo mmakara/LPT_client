@@ -6,6 +6,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class FabrykaZlecen {
+
+    /**
+     * Zwraca obiekt uzytkownika stworzony z odpowiedzi api
+     *
+     * @param userFromApi
+     *
+     * @return Uzytkownik
+     * @throws JSONException
+     */
     public static Uzytkownik zApi(JSONObject userFromApi) throws JSONException
     {
         Uzytkownik uzytkownik = new Uzytkownik();
@@ -20,6 +29,17 @@ public class FabrykaZlecen {
         return uzytkownik;
     }
 
+    /**
+     * Tworzy uzytkownika uzywanego podczas dodawania nowego zlecenia.
+     *
+     * @param user_id
+     * @param title
+     * @param description
+     * @param lat
+     * @param lng
+     * @return JSONObject uzytkownik
+     * @throws JSONException
+     */
     public static JSONObject doNowegoZlecenia (
         String user_id,
         String title,

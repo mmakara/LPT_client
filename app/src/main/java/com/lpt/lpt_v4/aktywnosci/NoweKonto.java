@@ -39,6 +39,12 @@ import org.json.JSONObject;
 
 import java.util.Locale;
 
+/**
+ * Klasa aktywności rejestracji konta, zawiera metody
+ * odnoszące się do api lokacji i pobiera długość i szerokość
+ * geograficzną użytkownika w metodzie onCreate.
+ *
+ */
 public class NoweKonto extends AppCompatActivity {
 
     private static final String TAG = NoweKonto.class.getSimpleName();
@@ -112,8 +118,6 @@ public class NoweKonto extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful() && task.getResult() != null) {
                             mLastLocation = task.getResult();
-
-
                             user_lat = String.format(Locale.ENGLISH, "%f",
                                     mLastLocation.getLatitude());
 
@@ -121,8 +125,6 @@ public class NoweKonto extends AppCompatActivity {
                                     mLastLocation.getLongitude());
                         } else {
                             Log.w(TAG, "getLastLocation:exception", task.getException());
-//                            showSnackbar(getString(R.string.no_location_detected));1
-                            int no_location = 0;
                         }
                     }
                 });
@@ -167,16 +169,6 @@ public class NoweKonto extends AppCompatActivity {
 
             int start_location = 1;
             startLocationPermissionRequest();
-
-//            showSnackbar(R.string.permission_rationale, android.R.string.ok,
-//                    new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            // Request permission
-//                            startLocationPermissionRequest();
-//                        }
-//                    });
-
         } else {
             Log.i(TAG, "Requesting permission");
             int start_location = 2;

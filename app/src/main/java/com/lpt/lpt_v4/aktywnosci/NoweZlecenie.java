@@ -11,6 +11,9 @@ import com.lpt.lpt_v4.R;
 import com.lpt.lpt_v4.Tools;
 import com.lpt.lpt_v4.fasada.Zlecenia;
 
+/**
+ * Klasa aktywności nowego zlecenia.
+ */
 public class NoweZlecenie extends Aktywnosc {
 
     private Zlecenia zlecenia;
