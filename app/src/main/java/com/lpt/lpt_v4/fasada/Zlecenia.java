@@ -3,6 +3,7 @@ package com.lpt.lpt_v4.fasada;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,8 +30,12 @@ public class Zlecenia {
         this.view = view;
     }
 
-    public void nowe()
+    public void nowe(String nazwa_zlecenia, String opis_zlecenia)
     {
+
+        String lat = intent.getStringExtra("job_lat");
+        String lng = intent.getStringExtra("job_lng");
+
         RequestQueue queue = Volley.newRequestQueue(context);
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -38,10 +43,11 @@ public class Zlecenia {
                     AdresyApi.nowe_zlecenie,
                     FabrykaZlecen.doNowegoZlecenia(
                             intent.getStringExtra("user_id"),
-                            Tools.stringZTextView(view.findViewById(R.id.newJobTitleInput)),
-                            Tools.stringZTextView(view.findViewById(R.id.newJobDescription)),
-                            intent.getStringExtra("job_lat"),
-                            intent.getStringExtra("job_lng")
+                            nazwa_zlecenia,
+                            opis_zlecenia,
+                            lat,
+                            lng
+
                     )
                     , new Response.Listener<JSONObject>() {
                 @Override

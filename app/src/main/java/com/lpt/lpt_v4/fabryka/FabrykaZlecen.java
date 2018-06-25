@@ -30,8 +30,8 @@ public class FabrykaZlecen {
         JSONObject uzytkownik_json = new JSONObject();
         uzytkownik_json.put("user_id", user_id);
         uzytkownik_json.put("title", title);
-        uzytkownik_json.put("description", lat);
-        uzytkownik_json.put("lat", lng);
+        uzytkownik_json.put("description", description);
+        uzytkownik_json.put("lat", lat);
         uzytkownik_json.put("lng", lng);
 
         return  uzytkownik_json;

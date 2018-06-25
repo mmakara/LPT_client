@@ -23,7 +23,7 @@ public class EkranUzytkownika extends Aktywnosc implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.ekran_uzytkownika);
 
         try {
             JSONObject uzytkownikJson = new JSONObject(getIntent().getStringExtra("uzytkownik"));
